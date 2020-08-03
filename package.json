@@ -1,0 +1,37 @@
+{
+  "name": "homebridge-roomme",
+  "description": "HomeBridge plugin for RoomMe by Intellithings - Specific people room level presence detection",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nitaybz/homebridge-roomme.git"
+  },
+  "license": "MIT",
+  "preferGlobal": true,
+  "keywords": [
+    "homebridge-plugin",
+    "homebridge-roomme",
+    "roomme",
+    "intellithings"
+  ],
+  "bugs": {
+    "url": "https://github.com/nitaybz/homebridge-roomme/issues"
+  },
+  "engines": {
+    "node": ">=10.17.0",
+    "homebridge": ">=0.4.4"
+  },
+  "dependencies": {
+    "internal-ip": "^6.0.0",
+    "lodash": "^4.17.19",
+    "node-persist": "^3.1.0",
+    "selfsigned": "^1.10.7"
+  },
+  "devDependencies": {
+    "eslint": "^7.1.0"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  }
+}
