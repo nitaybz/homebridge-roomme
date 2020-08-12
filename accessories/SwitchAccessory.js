@@ -1,29 +1,30 @@
 class SwitchAccessory {
-	constructor(log, config, api) {
-		this.log = log
-		this.api = api
-		this.name = config.user.name + ' Left Home'
-		this.userName = config.user.name
-		this.userId = config.user.userId
-		this.anyoneSensor = config.anyoneSensor
-		this.Service = api.hap.Service
-		this.Characteristic = api.hap.Characteristic
-		this.cachedAccessories = config.cachedAccessories
+	constructor(user, platform) {
+		this.log = platform.log
+		this.api = platform.api
+		this.storage = platform.storage
+		this.name = user.name + ' Left Home'
+		this.anyoneSensor = platform.anyoneSensor
+		this.userName = user.name
+		this.userId = user.userId
+		this.Service = platform.api.hap.Service
+		this.Characteristic = platform.api.hap.Characteristic
+		this.cachedAccessories = platform.cachedAccessories
+		this.cachedState = platform.cachedState
 
 
+		this.UUID = this.api.hap.uuid.generate(user.userId + ' Left Home')
 
-		this.uuid = api.hap.uuid.generate(config.room.sensorId)
-
-		this.accessory = this.cachedAccessories.find(accessory => accessory.UUID === this.uuid)
+		this.accessory = this.cachedAccessories.find(accessory => accessory.UUID === this.UUID)
 		if (!this.accessory) {
 			this.log(`Creating New "Left Home" Switch for ${this.userName}`)
-			this.accessory = new api.platformAccessory(this.name, this.uuid)
+			this.accessory = new this.api.platformAccessory(this.name, this.UUID)
 			this.accessory.context.userId = this.userId
 			this.accessory.context.userName = this.userName
 
 			this.cachedAccessories.push(this.accessory)
 			// register the accessory
-			api.registerPlatformAccessories('homebridge-roomme', 'RoomMe', [this.accessory])
+			this.api.registerPlatformAccessories('homebridge-roomme', 'RoomMe', [this.accessory])
 		}
 
 
@@ -38,10 +39,6 @@ class SwitchAccessory {
 				.setCharacteristic(this.Characteristic.SerialNumber, `user${this.userId}LeftHome`)
 		}
 
-		this.addService()
-	}
-
-	addService() {
 		this.SwitchService = this.accessory.getService(this.Service.Switch)
 
 		if (!this.SwitchService) {
@@ -49,9 +46,10 @@ class SwitchAccessory {
 		}
 
 		this.SwitchService.getCharacteristic(this.Characteristic.On)
-			.on('get', 0)
+			.on('get', callback => {callback(null, 0)})
 			.on('set', this.leftHome.bind(this));
 	}
+
 
 	leftHome(on, callback) {
 		if (on) {
@@ -64,12 +62,22 @@ class SwitchAccessory {
 						service.getCharacteristic(this.Characteristic.OccupancyDetected)
 							.updateValue(0)
 
+						// update cachedState
+						const sensorState = this.cachedState[accessory.context.sensorId]
+						const userIndex = sensorState.indexOf(nameId)
+						if (userIndex !== -1) {
+							sensorState.splice(userIndex, 1)
+							// store recent state in storage
+							this.storage.setItem('CachedState', this.cachedState)
+						}
+
 						// update anyone sensor if exists
 						if (this.anyoneSensor) {
 							const anyoneSensorService = accessory.getService('anyone')
 							if (anyoneSensorService)
 								anyoneSensorService.getCharacteristic(this.Characteristic.OccupancyDetected).getValue()
 						}
+
 					}
 				}
 			})

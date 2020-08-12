@@ -1,28 +1,32 @@
+const  _ = require('lodash/collection')
+
 class OccupancySensor {
-	constructor(log, config, api) {
-		this.log = log
-		this.api = api
-		this.name = config.room.name + ' RoomMe'
-		this.sensorId = config.room.sensorId
-		this.roomName = config.room.name
-		this.anyoneSensor = config.platform.anyoneSensor
-		this.stateArray = config.platform.cachedState[config.room.sensorId]
-		this.Service = api.hap.Service
-		this.Characteristic = api.hap.Characteristic
-		this.cachedAccessories = config.platform.cachedAccessories
+	constructor(room, platform) {
+		this.log = platform.log
+		this.api = platform.api
+		this.storage = platform.storage
+		this.name = room.name + ' RoomMe'
+		this.sensorId = room.sensorId
+		this.roomName = room.name
+		this.cachedState = platform.cachedState
+		this.stateArray = platform.cachedState[room.sensorId]
+		this.Service = this.api.hap.Service
+		this.Characteristic = this.api.hap.Characteristic
+		this.cachedAccessories = platform.cachedAccessories
 
-		this.uuid = api.hap.uuid.generate(config.room.sensorId)
+		this.UUID = this.api.hap.uuid.generate(room.sensorId)
 
-		this.accessory = this.cachedAccessories.find(accessory => accessory.UUID === this.uuid)
+		this.accessory = this.cachedAccessories.find(accessory => accessory.UUID === this.UUID)
+
 		if (!this.accessory) {
 			this.log(`Creating New RoomMe Occupancy Sensor the ${this.roomName}`)
-			this.accessory = new api.platformAccessory(this.name, this.uuid)
+			this.accessory = new this.api.platformAccessory(this.name, this.UUID)
 			this.accessory.context.sensorId = this.sensorId
 			this.accessory.context.roomName = this.roomName
 
 			this.cachedAccessories.push(this.accessory)
 			// register the accessory
-			api.registerPlatformAccessories('homebridge-roomme', 'RoomMe', [this.accessory])
+			this.api.registerPlatformAccessories('homebridge-roomme', 'RoomMe', [this.accessory])
 		}
 
 		let informationService = this.accessory.getService(this.Service.AccessoryInformation)
@@ -33,19 +37,11 @@ class OccupancySensor {
 				.setCharacteristic(this.Characteristic.Model, 'RoomMe Sensor')
 				.setCharacteristic(this.Characteristic.SerialNumber, this.sensorId)
 		}
-		
-
-		config.users.forEach(this.addService.bind(this))
-
-		if (this.anyoneSensor)
-			this.addAnyoneService()
 	}
 
-	addService(user) {
+	addUserService = (user) => {
 
 		const nameId = 'user' + user.userId
-
-
 		let OccupancyService = this.accessory.getService(nameId)
 
 		if (!OccupancyService) {
@@ -54,30 +50,67 @@ class OccupancySensor {
 				.setCharacteristic(this.Characteristic.	StatusLowBattery, 0)
 				.setCharacteristic(this.Characteristic.OccupancyDetected, 0)
 		}
-		
-
 	}
 
-	addAnyoneService() {
-		const nameId = 'anyone'
+	removeUserService = (service, user) => {
+
+		const nameId = service ? service.subtype : 'user' + user.userId 
+		const userName = service ? service.getCharacteristic(this.Characteristic.Name).value : user.name
+
+		this.log.easyDebug(`Removing User Service ${userName} (NOT IN DB)!`)
+
 		let OccupancyService = this.accessory.getService(nameId)
 
-		if (!OccupancyService) {
-			OccupancyService = this.accessory.addService(this.Service.OccupancySensor, nameId, nameId)
-				.setCharacteristic(this.Characteristic.Name, this.roomName + ' Anyone')
-				.setCharacteristic(this.Characteristic.	StatusLowBattery, 0)
-	
+		if (OccupancyService) {
+			// remove service
+			this.accessory.removeService(OccupancyService)
+
+			// delete user from cachedState
+			const userIndex = this.stateArray.indexOf(nameId)
+			if (userIndex !== -1) {
+				this.stateArray.splice(userIndex, 1)
+				// store recent state in storage
+				this.storage.setItem('CachedState', this.cachedState)
+			}
+
 		}
-			
-		OccupancyService.getCharacteristic(this.Characteristic.OccupancyDetected)
-			.on('get', this.getAnyoneOccupancy.bind(this))
 
 	}
 
-	getAnyoneOccupancy(callback) {
-		console.log('this.stateArray')
-		console.log(this.stateArray)
+	addAnyoneService = () => {
+		const nameId = 'anyone'
+		let AnyoneService = this.accessory.getService(nameId)
 
+		if (!AnyoneService) {
+			AnyoneService = this.accessory.addService(this.Service.OccupancySensor, nameId, nameId)
+				.setCharacteristic(this.Characteristic.Name, this.roomName + ' Anyone')
+				.setCharacteristic(this.Characteristic.	StatusLowBattery, 0)
+			
+		}
+
+		this.accessory.services = _.sortBy(this.accessory.services, function(service) {
+			return service.subtype === 'anyone' ? 0 : 1;
+		});
+
+		AnyoneService.setPrimaryService()
+		
+		AnyoneService.getCharacteristic(this.Characteristic.OccupancyDetected)
+			.on('get', this.getAnyoneOccupancy)
+
+	}
+
+
+	removeAnyoneService = () => {
+
+		this.log.easyDebug(`Removing ANYONE Service (removed from config)!`)
+		const nameId = 'anyone'
+		let AnyoneService = this.accessory.getService(nameId)
+		if (AnyoneService)
+			this.accessory.removeService(AnyoneService)
+
+	}
+
+	getAnyoneOccupancy = (callback) =>  {
 		if (this.stateArray.length)
 			callback(null, 1)
 		else

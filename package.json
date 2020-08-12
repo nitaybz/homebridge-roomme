@@ -24,8 +24,7 @@
   "dependencies": {
     "internal-ip": "^6.0.0",
     "lodash": "^4.17.19",
-    "node-persist": "^3.1.0",
-    "selfsigned": "^1.10.7"
+    "node-persist": "^3.1.0"
   },
   "devDependencies": {
     "eslint": "^7.1.0"
