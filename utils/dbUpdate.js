@@ -38,7 +38,7 @@ const dbUpdate = function (platform) {
 					Sensor.addAnyoneService()
 
 				// add users services
-				users.forEach(() => {Sensor.addUserService()})
+				users.forEach(user => {Sensor.addUserService(user)})
 
 				if (!platform.cachedState[room.sensorId])
 					platform.cachedState[room.sensorId] = []

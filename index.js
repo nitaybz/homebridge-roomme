@@ -90,7 +90,7 @@ class roomMePlatform {
 				Sensor.removeAnyoneService()
 
 			// add users services
-			this.cachedData.users.forEach(() => {Sensor.addUserService})
+			this.cachedData.users.forEach(user => {Sensor.addUserService(user)})
 
 			// remove unused users services
 			const userServices = Sensor.accessory.services.filter(service => service.subtype && service.subtype.includes('user'))
