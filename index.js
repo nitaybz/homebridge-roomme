@@ -62,7 +62,7 @@ class roomMePlatform {
 			this.cachedState = await this.storage.getItem('CachedState') || {}
 
 			if (this.cachedData) 
-				await this.syncHomeKitCache()
+				this.syncHomeKitCache()
 			
 			server.start()
 		})
@@ -76,7 +76,7 @@ class roomMePlatform {
 		this.cachedAccessories.push(accessory)
 	}
 
-	syncHomeKitCache = () => {
+	syncHomeKitCache() {
 
 		this.cachedData.rooms.forEach(room => {
 
@@ -90,7 +90,7 @@ class roomMePlatform {
 				Sensor.removeAnyoneService()
 
 			// add users services
-			this.cachedData.users.forEach(Sensor.addUserService)
+			this.cachedData.users.forEach(() => {Sensor.addUserService})
 
 			// remove unused users services
 			const userServices = Sensor.accessory.services.filter(service => service.subtype && service.subtype.includes('user'))

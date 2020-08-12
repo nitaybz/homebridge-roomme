@@ -17,7 +17,7 @@ class Server {
     this.eventUpdate = platform.eventUpdate
   }
 
-  start = async () => {
+  async start() {
     let hostIP = this.host
     let protocol = 'http'
     if (this.host === '0.0.0.0' || this.host === 'localhost')
@@ -30,9 +30,9 @@ class Server {
           key: fs.readFileSync(this.httpsKeyFile),
           cert: fs.readFileSync(this.sslCertFile)
         }
-        https.createServer(sslOptions, this.serverCallback).listen(this.port, this.host)
+        https.createServer(sslOptions, this.serverCallback.bind(this)).listen(this.port, this.host)
       } else {
-        http.createServer(this.serverCallback).listen(this.port, this.host)
+        http.createServer(this.serverCallback.bind(this)).listen(this.port, this.host)
       }
       this.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
       this.log(`RoomMe Server is Running on:`)
@@ -44,7 +44,7 @@ class Server {
     }
   }
 
-  serverCallback = (request, response) => {
+  serverCallback(request, response) {
     let data, body = []
     request.on('error', ((err) => {
       this.log.easyDebug("[ERROR Http WebHook Server] Reason: %s.", err)

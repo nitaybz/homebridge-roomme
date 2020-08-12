@@ -38,7 +38,7 @@ const dbUpdate = function (platform) {
 					Sensor.addAnyoneService()
 
 				// add users services
-				users.forEach(Sensor.addUserService)
+				users.forEach(() => {Sensor.addUserService()})
 
 				if (!platform.cachedState[room.sensorId])
 					platform.cachedState[room.sensorId] = []
@@ -103,8 +103,6 @@ const dbUpdate = function (platform) {
 		//find cached users that was removed from DB
 		const removedUsers = _.differenceBy(cachedData.users, newData.users, (user) => user.userId)
 	
-		await platform.storage.setItem('DataBaseCache', newData)
-	
 		if (newRooms.length || newUsers.length)
 			addNewAccessories.bind(this)(newRooms, newUsers, newData)
 	
@@ -112,10 +110,10 @@ const dbUpdate = function (platform) {
 			removeCachedAccessories.bind(this)(removedRooms, removedUsers)
 	
 		// store recent data in storage
-		await platform.storage.setItem('DataBaseCache', newData)
+		platform.storage.setItem('DataBaseCache', newData)
 	
 		// store recent state in storage
-		await platform.storage.setItem('CachedState', platform.cachedState)
+		platform.storage.setItem('CachedState', platform.cachedState)
 	}
 }
 

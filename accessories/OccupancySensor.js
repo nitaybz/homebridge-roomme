@@ -39,7 +39,7 @@ class OccupancySensor {
 		}
 	}
 
-	addUserService = (user) => {
+	addUserService(user) {
 
 		const nameId = 'user' + user.userId
 		let OccupancyService = this.accessory.getService(nameId)
@@ -52,7 +52,7 @@ class OccupancySensor {
 		}
 	}
 
-	removeUserService = (service, user) => {
+	removeUserService(service, user) {
 
 		const nameId = service ? service.subtype : 'user' + user.userId 
 		const userName = service ? service.getCharacteristic(this.Characteristic.Name).value : user.name
@@ -77,7 +77,7 @@ class OccupancySensor {
 
 	}
 
-	addAnyoneService = () => {
+	addAnyoneService() {
 		const nameId = 'anyone'
 		let AnyoneService = this.accessory.getService(nameId)
 
@@ -95,12 +95,12 @@ class OccupancySensor {
 		AnyoneService.setPrimaryService()
 		
 		AnyoneService.getCharacteristic(this.Characteristic.OccupancyDetected)
-			.on('get', this.getAnyoneOccupancy)
+			.on('get', this.getAnyoneOccupancy.bind(this))
 
 	}
 
 
-	removeAnyoneService = () => {
+	removeAnyoneService() {
 
 		this.log.easyDebug(`Removing ANYONE Service (removed from config)!`)
 		const nameId = 'anyone'
@@ -110,7 +110,7 @@ class OccupancySensor {
 
 	}
 
-	getAnyoneOccupancy = (callback) =>  {
+	getAnyoneOccupancy(callback)  {
 		if (this.stateArray.length)
 			callback(null, 1)
 		else
