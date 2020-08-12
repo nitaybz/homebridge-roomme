@@ -48,8 +48,10 @@ class OccupancySensor {
 			OccupancyService = this.accessory.addService(this.Service.OccupancySensor, nameId, nameId)
 				.setCharacteristic(this.Characteristic.Name, this.roomName + ' ' + user.name)
 				.setCharacteristic(this.Characteristic.	StatusLowBattery, 0)
-				.setCharacteristic(this.Characteristic.OccupancyDetected, 0)
 		}
+
+		OccupancyService.getCharacteristic(this.Characteristic.OccupancyDetected)
+			.updateValue(this.stateArray.includes(nameId) ? 1 : 0)
 	}
 
 	removeUserService(service, user) {
@@ -95,7 +97,7 @@ class OccupancySensor {
 		AnyoneService.setPrimaryService()
 		
 		AnyoneService.getCharacteristic(this.Characteristic.OccupancyDetected)
-			.on('get', this.getAnyoneOccupancy.bind(this))
+			.on('get', callback => {this.getAnyoneOccupancy(callback)})
 
 	}
 

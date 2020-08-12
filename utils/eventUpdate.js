@@ -62,6 +62,12 @@ const eventUpdate = function(platform){
 					service.getCharacteristic(platform.Characteristic.StatusLowBattery)
 						.updateValue(1)
 			})
+
+			const anyoneService = foundAccessory.getService('anyone')
+			if (anyoneService)
+				anyoneService.getCharacteristic(platform.Characteristic.StatusLowBattery)
+					.updateValue(1)
+
 		}
 	}
 
@@ -84,6 +90,11 @@ const eventUpdate = function(platform){
 					service.getCharacteristic(platform.Characteristic.StatusLowBattery)
 						.updateValue(0)
 			})
+
+			const anyoneService = foundAccessory.getService('anyone')
+			if (anyoneService)
+				anyoneService.getCharacteristic(platform.Characteristic.StatusLowBattery)
+					.updateValue(0)
 		}
 	}
 
