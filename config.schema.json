@@ -2,7 +2,7 @@
     "pluginAlias": "RoomMe",
     "pluginType": "platform",
     "singular": true,
-    "headerDisplay": "HomeBridge plugin for RoomMe by Intellithings - Specific people room level presence detection. <br>Please visit the Project [Readme](https://github.com/benzman81/homebridge-http-webhooks#readme) for proper installation guide.",
+    "headerDisplay": "HomeBridge plugin for RoomMe by Intellithings - Specific people room level presence detection. <br>Please visit the Project [Readme](https://github.com/nitaybz/homebridge-roomme#readme) for proper installation guide.",
     "footerDisplay": "Created by @nitaybz",
     "schema": {
         "type": "object",
