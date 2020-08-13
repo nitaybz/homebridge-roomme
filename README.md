@@ -77,13 +77,13 @@ This plugin support Homebridge UI and  is [HOOBS](https://hoobs.org/?ref=10876) 
 | :--------------: | :-----------------------------------------------------: |:--------:|:--------:|:--------:|
 | `platform`       |   always "RoomMe"                                       |     ✓    |     -    |  String  |
 | `anyoneSensor`   | When set to `true`, it creates an extra occupancy service on each room which represent "Anyone". It will trigger when someone is in the room and will turn off when no one is in the room. [read more here](###-Anyone-Sensor)     |   |  `false`  | Boolean |
-| `leftHomeSwitch` |  When set to `true`, it will create a switch in HomeKit for each user. When turned ON, it will remove this user from the last room he has been detected in. [read more here](###-"Left-Home"-Switch)                              |   |  `false`  | Boolean |
+| `leftHomeSwitch` |  When set to `true`, it creates a switch in HomeKit for each user. When turned ON, it will remove this user from the last room he has been detected in. [read more here](###-"Left-Home"-Switch)                              |   |  `false`  | Boolean |
 | `host`           |  Hostname of the generated server.  [read more here](##Advanced-Server-Configurations)  |   | `0.0.0.0` |  String |
 | `port`               |  Port of the generated server.  [read more here](##Advanced-Server-Configurations)  |   |  `13579`  |  String |
-| `secured`    |  Creates HTTPS secure server with SSL certificate that you provide                          |   |  `false`  | Boolean |
+| `secured`    |  Creates HTTPS secure server with SSL certificate that you provide.                         |   |  `false`  | Boolean |
 | `sslKeyFile` |  Path to your SSL key file. [read more here](##Advanced-Server-Configurations)          |     when using `secured`     |     -   |  String  |
-| `sslCertFile`|  Path to your SSL certifxwicate file. [read more here](##Advanced-Server-Configurations)  |     when using `secured`   |   -  |   String |
-| `debug`      |  When set to `true`, the plugin will produce extra logs for debugging purposes              |   |  `false`  | Boolean |
+| `sslCertFile`|  Path to your SSL certificate file. [read more here](##Advanced-Server-Configurations)  |     when using `secured`   |   -  |   String |
+| `debug`      |  When set to `true`, the plugin will produce extra logs for debugging purposes.            |   |  `false`  | Boolean |
 
 
 
@@ -140,6 +140,7 @@ you can just copy-paste it from the console to RoomMe app
 ## Advanced Server Configurations
 
 This plugin is creating a server using NodeJS built-in http and https libraries, therefore, I created a few extra options for advanced users to play with:
+
 - **`host`** - change the hostname of the server (must be available before plugin initialization)
 - **`port`** - change the port of the server.
 - **`secured`** - creates https secured server. when using this option, cert and key files are required as the plugin will not create a self signed SSL certificate since it is not supported by the RoomMe app.
@@ -149,6 +150,7 @@ This plugin is creating a server using NodeJS built-in http and https libraries,
 \* Please update the link in RoomMe app if you change those settings after the initial configuration.
 
 ## Issues & Debug
+
 If you experience any issues with the plugins or struggle with the configurations visit the [Issues](https://github.com/nitaybz/homebridge-roomme/issues) tab and check if your issue is already described there, if it doesn't, please create a new issue with as much detailed information as you can give (logs are crucial).<br>
 if you want to even speed up the process, you can add `"debug": true` to your config, which will give me more details on the logs and speed up fixing the issue.
 
