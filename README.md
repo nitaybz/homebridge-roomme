@@ -35,7 +35,7 @@ This plugin support Homebridge UI and  is [HOOBS](https://hoobs.org/?ref=10876) 
 2. Install this plugin using: `sudo npm install -g homebridge-roomme`
 3. Update your configuration file. See `config-sample.json` in this repository for a sample.
 4. If you haven't installed RoomMe sensors already, follow the RoomMe Install guide [here](https://www.intellithings.net/setupintro) and install the sensors.
-5. [Enable RoomMe API](##-Enable-RoomMe-API) from their app and connect it to HomeBridge. [click for more information](##-Enable-RoomMe-API).
+5. [Enable RoomMe API](#enable-roomme-api) from their app and connect it to HomeBridge. [click for more information](#enable-roomme-api).
 
 
 ## Config file
@@ -67,7 +67,7 @@ This plugin support Homebridge UI and  is [HOOBS](https://hoobs.org/?ref=10876) 
     }
 ]
 ```
-\* In order to get better understaning on the advanced features and the plugin in general, read more on [how the plugin works & it's limitations](##-How-the-plugin-works-+-limitations) and ["Advanced Server Configurations"](##Advanced-Server-Configurations)
+\* In order to get better understaning on the advanced features and the plugin in general, read more on [how the plugin works & it's limitations](#how-the-plugin-works--limitations) and ["Advanced Server Configurations"](#advanced-server-configurations)
 
 
 ### Configurations Table
@@ -76,13 +76,13 @@ This plugin support Homebridge UI and  is [HOOBS](https://hoobs.org/?ref=10876) 
 |     Parameter    |                       Description                       | Required |  Default |   type   |
 | :--------------: | :-----------------------------------------------------: |:--------:|:--------:|:--------:|
 | `platform`       |   always "RoomMe"                                       |     ✓    |     -    |  String  |
-| `anyoneSensor`   | When set to `true`, it creates an extra occupancy service on each room which represent "Anyone". It will trigger when someone is in the room and will turn off when no one is in the room. [read more here](###-Anyone-Sensor)     |   |  `false`  | Boolean |
-| `leftHomeSwitch` |  When set to `true`, it creates a switch in HomeKit for each user. When turned ON, it will remove this user from the last room he has been detected in. [read more here](###-"Left-Home"-Switch)                              |   |  `false`  | Boolean |
-| `host`           |  Hostname of the generated server.  [read more here](##Advanced-Server-Configurations)  |   | `0.0.0.0` |  String |
-| `port`               |  Port of the generated server.  [read more here](##Advanced-Server-Configurations)  |   |  `13579`  |  String |
+| `anyoneSensor`   | When set to `true`, it creates an extra occupancy service on each room which represent "Anyone". It will trigger when someone is in the room and will turn off when no one is in the room. [read more here](#anyone-sensor)     |   |  `false`  | Boolean |
+| `leftHomeSwitch` |  When set to `true`, it creates a switch in HomeKit for each user. When turned ON, it will remove this user from the last room he has been detected in. [read more here](#left-home-switch)                              |   |  `false`  | Boolean |
+| `host`           |  Hostname of the generated server.  [read more here](#advanced-server-configurations)  |   | `0.0.0.0` |  String |
+| `port`               |  Port of the generated server.  [read more here](#advanced-server-configurations)  |   |  `13579`  |  String |
 | `secured`    |  Creates HTTPS secure server with SSL certificate that you provide.                         |   |  `false`  | Boolean |
-| `sslKeyFile` |  Path to your SSL key file. [read more here](##Advanced-Server-Configurations)          |     when using `secured`     |     -   |  String  |
-| `sslCertFile`|  Path to your SSL certificate file. [read more here](##Advanced-Server-Configurations)  |     when using `secured`   |   -  |   String |
+| `sslKeyFile` |  Path to your SSL key file. [read more here](#advanced-server-configurations)          |     when using `secured`     |     -   |  String  |
+| `sslCertFile`|  Path to your SSL certificate file. [read more here](#advanced-server-configurations)  |     when using `secured`   |   -  |   String |
 | `debug`      |  When set to `true`, the plugin will produce extra logs for debugging purposes.            |   |  `false`  | Boolean |
 
 
@@ -99,7 +99,7 @@ Because of this method, there are some limitations to the presence detection in 
 1. **LIMITATION** - Since the plugin server is on local IP, the events will only trigger when your mobile devices are on the same WiFi network as HomeBridge and not on 3G/4G networks.
 
 - **SOLUTION** - To make the plugin work outside your home network (in case your using 4G at home), you'll need to have an external static IP (or domain) with a port forwarding to the plugin port (default: 13579). This can be achieved through your Internet Service Provider (ISP) or via free Dynamic DNS Service like [no-ip](https://www.noip.com/) or [Cloudns](https://www.cloudns.net/aff/id/431407/). You can even use a service like [Ngrok](https://ngrok.com/) to create public URL and secure connection to your local machine.
-<br>*you can read more on **Advanced Server Configurations** [here](##Advanced-Server-Configurations)
+<br>*you can read more on **Advanced Server Configurations** [here](#advanced-server-configurations)
 
 ### Anyone Sensor
 
