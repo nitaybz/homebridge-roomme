@@ -1,0 +1,26 @@
+{
+  "bridge": {
+    "name": "Homebridge",
+    "username": "CD:22:3D:E3:CE:30",
+    "port": 51826,
+    "pin": "031-45-154"
+  },
+
+  "description": "This is an example configuration for the roomme homebridge plugin",
+  "platforms": [
+    {
+      "platform": "RoomMe",
+      "anyoneSensor": true,
+      "leftHomeSwitch": true,
+      "host": "0.0.0.0",
+      "port": "13579",
+      "secured": false,
+      "sslKeyFile": "/path/to/ssl/key/file",
+      "sslCertFile": "/path/to/ssl/certificate/file",
+      "debug": true
+    }
+  ],
+
+  "accessories": [
+  ]
+}

@@ -32,5 +32,19 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
-  }
+  },
+  "funding": [
+    {
+      "type" : "paypal",
+      "url" : "https://paypal.me/nitaybz"
+    },
+    {
+      "type" : "patreon",
+      "url" : "https://www.patreon.com/nitaybz"
+    },
+    {
+      "type" : "kofi",
+      "url" : "https://ko-fi.com/nitaybz"
+    }
+  ]
 }

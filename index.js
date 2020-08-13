@@ -14,14 +14,14 @@ class roomMePlatform {
 		// store restored cached accessories here
 		this.cachedAccessories = []
 		this.cachedSensors = []
+		this.anyoneSensor = config['anyoneSensor'] || false
+		this.leftHomeSwitch = config['leftHomeSwitch'] || false
 		this.host = config['host'] || '0.0.0.0'
 		this.port = config['port'] || '13579'
 		this.secured = config['secured'] || false
     this.sslKeyFile = config['sslKeyFile'] || false
     this.sslCertFile = config['sslCertFile'] || false
 		this.debug = config['debug'] || false
-		this.anyoneSensor = config['anyoneSensor'] || false
-		this.leftHomeSwitch = config['leftHomeSwitch'] || false
 		this.log = log
 		this.api = api
 		this.storage = require('node-persist')
