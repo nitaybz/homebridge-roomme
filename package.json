@@ -1,7 +1,7 @@
 {
   "name": "homebridge-roomme",
   "description": "HomeBridge plugin for RoomMe by Intellithings - Specific people room level presence detection",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/nitaybz/homebridge-roomme.git"
