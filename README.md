@@ -12,7 +12,7 @@ Specific people room level presence detection
 
 
 
-  <img src="branding/roomme-box.jpg" width="700px">
+  <img src="branding/roomme-box.jpg" width="400px">
 
 ### Requirements
 
