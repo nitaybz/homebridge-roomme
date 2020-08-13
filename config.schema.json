@@ -2,7 +2,7 @@
     "pluginAlias": "RoomMe",
     "pluginType": "platform",
     "singular": true,
-    "headerDisplay": "HomeBridge plugin for RoomMe by Intellithings - Specific people room level presence detection. <br>Please visit the Project [Readme](https://github.com/nitaybz/homebridge-roomme#readme) for proper installation guide.",
+    "headerDisplay": "HomeBridge plugin for RoomMe by Intellithings - Specific people room level presence detection. <br>Please visit the [Project Readme](https://github.com/nitaybz/homebridge-roomme#readme) for proper installation guide.",
     "footerDisplay": "Created by @nitaybz",
     "schema": {
         "type": "object",
@@ -15,49 +15,49 @@
             },
             "anyoneSensor": {
                 "title": "Anyone Sensor",
-                "description": "When enabled, it creates an extra occupancy service on each room which represent \"Anyone\". It will trigger when someone is in the room and will turn off when no one is in the room. [read more here](https://github.com/nitaybz/homebridge-roomme###-Anyone-Sensor)",
+                "description": "When enabled, it creates an extra occupancy service on each room which represent \"Anyone\". It will trigger when someone is in the room and will turn off when no one is in the room. read more here: https://github.com/nitaybz/homebridge-roomme###-Anyone-Sensor",
                 "type": "boolean",
                 "default": false,
                 "required": false
             },
             "leftHomeSwitch": {
                 "title": "\"Left Home\" Switch",
-                "description": "When enabled, it creates a switch in HomeKit for each user. When turned ON, it will remove this user from the last room he has been detected in. [read more here](https://github.com/nitaybz/homebridge-roomme###-\"Left-Home\"-Switch)",
+                "description": "When enabled, it creates a switch in HomeKit for each user. When turned ON, it will remove this user from the last room he has been detected in. read more here: https://github.com/nitaybz/homebridge-roomme###-\"Left-Home\"-Switch",
                 "type": "boolean",
                 "default": false,
                 "required": false
             },
             "host": {
-                "title": "Server Hostname **~advanced~**",
-                "description": "Hostname of the generated server.  [read more here](https://github.com/nitaybz/homebridge-roomme##Advanced-Server-Configurations)",
+                "title": "Server Hostname <b>~advanced~</b>",
+                "description": "Hostname of the generated server.  read more here: https://github.com/nitaybz/homebridge-roomme##Advanced-Server-Configurations",
                 "type": "string",
                 "placeholder": "0.0.0.0",
                 "required": false
             },
             "port": {
-                "title": "Server Port **~advanced~**",
-                "description": "Port of the generated server.  [read more here](https://github.com/nitaybz/homebridge-roomme##Advanced-Server-Configurations)",
+                "title": "Server Port <b>~advanced~</b>",
+                "description": "Port of the generated server.  read more here: https://github.com/nitaybz/homebridge-roomme##Advanced-Server-Configurations",
                 "type": "string",
                 "placeholder": "13579",
                 "required": false
             },
             "secured": {
-                "title": "Secured Server (HTTPS) - use only if you have a valid SSL certificate **~advanced~**",
+                "title": "Secured Server (HTTPS) - use only if you have a valid SSL certificate <b>~advanced~</b>",
                 "description": "Creates HTTPS secure server with SSL certificate that you provide",
                 "type": "boolean",
                 "default": false,
                 "required": false
             },
             "sslKeyFile": {
-                "title": "SSL Key File Path **~advanced~**",
-                "description": "Path to your SSL key file. [read more here](https://github.com/nitaybz/homebridge-roomme##Advanced-Server-Configurations)",
+                "title": "SSL Key File Path <b>~advanced~</b>",
+                "description": "Path to your SSL key file. read more here: https://github.com/nitaybz/homebridge-roomme##Advanced-Server-Configurations",
                 "type": "string",
                 "placeholder": "/path/to/ssl/key/file",
                 "required": false
             },
             "sslCertFile": {
-                "title": "SSL Certificate File Path **~advanced~**",
-                "description": "Path to your SSL certificate file. [read more here](https://github.com/nitaybz/homebridge-roomme##Advanced-Server-Configurations)",
+                "title": "SSL Certificate File Path <b>~advanced~</b>",
+                "description": "Path to your SSL certificate file. read more here: https://github.com/nitaybz/homebridge-roomme##Advanced-Server-Configurations",
                 "type": "string",
                 "placeholder": "/path/to/ssl/cert/file",
                 "required": false
