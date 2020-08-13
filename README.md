@@ -134,7 +134,7 @@ Link is set, the app starts sending HTTP based updates to the set server address
 3. Click SAVE and follow the short sync process in the app.
 
 The link to the server is also published in the console in this form:<br>
-<img src="branding/console-server.png" width="400px"><br>
+<img src="branding/console-server.png" width="600px"><br>
 you can just copy-paste it from the console to RoomMe app
 
 ## Advanced Server Configurations
