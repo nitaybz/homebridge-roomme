@@ -35,7 +35,7 @@ This plugin support Homebridge UI and  is [HOOBS](https://hoobs.org/?ref=10876) 
 2. Install this plugin using: `sudo npm install -g homebridge-roomme`
 3. Update your configuration file. See `config-sample.json` in this repository for a sample.
 4. If you haven't installed RoomMe sensors already, follow the RoomMe Install guide [here](https://www.intellithings.net/setupintro) and install the sensors.
-5. [Enable RoomMe API](#enable-roomme-api) from their app and connect it to HomeBridge. [click for more information](#enable-roomme-api).
+5. [Enable RoomMe API](#enable-roomme-api) from RoomMe app and connect it to HomeBridge. Do this on every device connected to RoomMe. [click for more information](#enable-roomme-api).
 
 
 ## Config file
@@ -117,10 +117,16 @@ Because of this method, there are some limitations to the presence detection in 
  <img src="branding/automation.png" width="300px"><br>
  *The switch will automatically shut off after 2 seconds
 
+### Background App
+
+3. **LIMITATION** - RoomMe works as a background app on iOS and therefore it **MUST** be open in the background in order to send the events. On Android it works as a service so it doesn't have this limitation.
+
+ - **SOLUTION** - Just make sure your RoomMe app is always there open in the Background on your iOS device. If you restart your iPhone while RoomMe app was open in the background it should reopen automatically. So just make sure not to close it and you're good.
+
 
 ## Enable RoomMe API
-RoomMe API is enabled by defining an External Link component on the RoomMe App (RoomMe API Destination). Once the External
-Link is set, the app starts sending HTTP based updates to the set server address.
+RoomMe API is enabled by defining an External Link component on the RoomMe App (RoomMe API Destination). Once the External Link is set, the app starts sending HTTP based updates to the set server address.
+You'll need to  do this process with every device of each user in the house.
 
 #### To enable during the initial setup of RoomMe:
 1. At Smart Device Definition stage of the setup, select “RoomMe API Destination”. And click Next.
