@@ -80,6 +80,13 @@ class roomMePlatform {
 
 		this.cachedData.rooms.forEach(room => {
 
+
+			if (!this.cachedState[room.sensorId]) {
+				this.cachedState[room.sensorId] = []
+				// store recent state in storage
+				this.storage.setItem('CachedState', this.cachedState)
+			}
+			
 			// add Sensor or verify cached sensor
 			const Sensor = new OccupancySensor(room, this)
 			
@@ -100,12 +107,6 @@ class roomMePlatform {
 					Sensor.removeUserService(userService)
 			})
 
-			if (!this.cachedState[room.sensorId]) {
-				this.cachedState[room.sensorId] = []
-				// store recent state in storage
-				this.storage.setItem('CachedState', this.cachedState)
-			}
-
 			this.cachedSensors.push(Sensor)
 		})
 
@@ -119,7 +120,7 @@ class roomMePlatform {
 			this.log.easyDebug(`Removing Sensors (NOT IN DB):`)
 			this.log.easyDebug(accessoriesToRemove)
 	
-			this.api.unregisterPlatformAccessories('homebridge-roomme', 'RoomMe', [accessoriesToRemove])
+			this.api.unregisterPlatformAccessories('homebridge-roomme', 'RoomMe', accessoriesToRemove)
 			this.cachedAccessories = _.pullAllBy(this.cachedAccessories, accessoriesToRemove, (accessory) => accessory.UUID) 
 			
 			// delete room from cachedState

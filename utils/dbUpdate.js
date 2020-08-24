@@ -30,6 +30,9 @@ const dbUpdate = function (platform) {
 
 	const addRoomAccessory = (room, users) => {
 
+				if (!platform.cachedState[room.sensorId])
+					platform.cachedState[room.sensorId] = []
+					
 				// add Sensor or verify cached sensor
 				const Sensor = new OccupancySensor(room, platform)
 				
@@ -40,8 +43,6 @@ const dbUpdate = function (platform) {
 				// add users services
 				users.forEach(user => {Sensor.addUserService(user)})
 
-				if (!platform.cachedState[room.sensorId])
-					platform.cachedState[room.sensorId] = []
 
 				platform.cachedSensors.push(Sensor)
 				platform.cachedAccessories.push(Sensor.accessory)
