@@ -36,6 +36,7 @@ class OccupancySensor {
 				.setCharacteristic(this.Characteristic.Manufacturer, 'Intellithings')
 				.setCharacteristic(this.Characteristic.Model, 'RoomMe Sensor')
 				.setCharacteristic(this.Characteristic.SerialNumber, this.sensorId)
+				.setCharacteristic(Characteristic.AppMatchingIdentifier, 'net.intellithings.roomme')
 		}
 	}
 

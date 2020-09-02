@@ -4,7 +4,7 @@
 
 [![Downloads](https://img.shields.io/npm/dt/homebridge-roomme.svg?color=critical)](https://www.npmjs.com/package/homebridge-roomme)
 [![Version](https://img.shields.io/npm/v/homebridge-roomme)](https://www.npmjs.com/package/homebridge-roomme)<br>
-[![verified-by-homebridge](https://badgen.net/badge/homebridge/verified/purple)](https://github.com/homebridge/homebridge/wiki/Verified-Plugins) [![Homebridge Discord](https://img.shields.io/discord/432663330281226270?color=728ED5&logo=discord&label=discord)](https://discord.gg/7DyabQ6)<br>
+[![verified-by-homebridge](https://badgen.net/badge/homebridge/verified/purple)](https://github.com/homebridge/homebridge/wiki/Verified-Plugins) [![Homebridge Discord](https://img.shields.io/discord/432663330281226270?color=728ED5&logo=discord&label=discord)](https://discord.gg/s7YM4z)<br>
 [![certified-hoobs-plugin](https://badgen.net/badge/HOOBS/Certified/yellow)](https://plugins.hoobs.org?ref=10876) [![hoobs-support](https://badgen.net/badge/HOOBS/Support/yellow)](https://support.hoobs.org?ref=10876)
 
 **[Homebridge](https://github.com/nfarina/homebridge) plugin for roomme by Intellithings -<br>**

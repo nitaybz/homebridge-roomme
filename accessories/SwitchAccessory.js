@@ -37,6 +37,7 @@ class SwitchAccessory {
 				.setCharacteristic(this.Characteristic.Manufacturer, 'Intellithings')
 				.setCharacteristic(this.Characteristic.Model, 'Left Home Switch')
 				.setCharacteristic(this.Characteristic.SerialNumber, `user${this.userId}LeftHome`)
+				.setCharacteristic(Characteristic.AppMatchingIdentifier, 'net.intellithings.roomme')
 		}
 
 		this.SwitchService = this.accessory.getService(this.Service.Switch)
