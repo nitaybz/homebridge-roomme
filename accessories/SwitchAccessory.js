@@ -34,11 +34,12 @@ class SwitchAccessory {
 
 		if (!informationService) {
 			informationService = this.accessory.addService(this.Service.AccessoryInformation)
-				.setCharacteristic(this.Characteristic.Manufacturer, 'Intellithings')
-				.setCharacteristic(this.Characteristic.Model, 'Left Home Switch')
-				.setCharacteristic(this.Characteristic.SerialNumber, `user${this.userId}LeftHome`)
-				.setCharacteristic(Characteristic.AppMatchingIdentifier, 'net.intellithings.roomme')
 		}
+		informationService
+			.setCharacteristic(this.Characteristic.Manufacturer, 'Intellithings')
+			.setCharacteristic(this.Characteristic.Model, 'Left Home Switch')
+			.setCharacteristic(this.Characteristic.SerialNumber, `user${this.userId}LeftHome`)
+			.setCharacteristic(Characteristic.AppMatchingIdentifier, 'net.intellithings.roomme')
 
 		this.SwitchService = this.accessory.getService(this.Service.Switch)
 

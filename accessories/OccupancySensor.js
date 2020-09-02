@@ -33,11 +33,12 @@ class OccupancySensor {
 
 		if (!informationService) {
 			informationService = this.accessory.addService(this.Service.AccessoryInformation)
-				.setCharacteristic(this.Characteristic.Manufacturer, 'Intellithings')
-				.setCharacteristic(this.Characteristic.Model, 'RoomMe Sensor')
-				.setCharacteristic(this.Characteristic.SerialNumber, this.sensorId)
-				.setCharacteristic(Characteristic.AppMatchingIdentifier, 'net.intellithings.roomme')
 		}
+		informationService
+			.setCharacteristic(this.Characteristic.Manufacturer, 'Intellithings')
+			.setCharacteristic(this.Characteristic.Model, 'RoomMe Sensor')
+			.setCharacteristic(this.Characteristic.SerialNumber, this.sensorId)
+			.setCharacteristic(Characteristic.AppMatchingIdentifier, 'net.intellithings.roomme')
 	}
 
 	addUserService(user) {
