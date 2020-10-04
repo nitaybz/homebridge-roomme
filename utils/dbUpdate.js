@@ -79,7 +79,7 @@ const dbUpdate = function (platform) {
 
 			// delete user from cachedState
 			Object.keys(platform.cachedState).forEach(sensor => {
-				const userIndex = platform.cachedState[sensor].indexOf(service.subtype)
+				const userIndex = platform.cachedState[sensor].indexOf(sensor.subtype)
 				if (userIndex !== -1)
 					platform.cachedState[sensor].splice(userIndex, 1)
 			})
