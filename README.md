@@ -1,4 +1,4 @@
-<img src="branding/roomme_hb.svg" width="700px">
+<img src="branding/roomme_homebridge.png" width="500px">
 
 # homebridge-roomme
 
