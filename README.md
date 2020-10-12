@@ -29,7 +29,7 @@ The plugin is creating a virtual http server that listens to RoomMe events (sent
 
 # Installation
 
-This plugin support Homebridge UI and  is [HOOBS](https://hoobs.org/?ref=10876) certified and can be easily installed and configured through their UI.
+This plugin is Homebridge verified and HOOBS certified and can be easily installed and configured through their UI.
 
 1. Install homebridge using: `sudo npm install -g homebridge --unsafe-perm`
 2. Install this plugin using: `sudo npm install -g homebridge-roomme`
