@@ -12,6 +12,7 @@
       "platform": "RoomMe",
       "anyoneSensor": true,
       "leftHomeSwitch": true,
+      "disableExitEvents": false,
       "host": "0.0.0.0",
       "port": "13579",
       "secured": false,

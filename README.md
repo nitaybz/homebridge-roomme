@@ -58,6 +58,7 @@ This plugin is Homebridge verified and HOOBS certified and can be easily install
         "platform": "RoomMe",
         "anyoneSensor": true,
         "leftHomeSwitch": true,
+        "enableExitEvents": false,
         "host": "0.0.0.0",
         "port": "13579",
         "secured": false,
@@ -67,7 +68,7 @@ This plugin is Homebridge verified and HOOBS certified and can be easily install
     }
 ]
 ```
-\* In order to get better understaning on the advanced features and the plugin in general, read more on [how the plugin works & it's limitations](#how-the-plugin-works--limitations) and ["Advanced Server Configurations"](#advanced-server-configurations)
+\* In order to get better understanding on the advanced features and the plugin in general, read more on [how the plugin works & it's limitations](#how-the-plugin-works--limitations) and ["Advanced Server Configurations"](#advanced-server-configurations)
 
 
 ### Configurations Table
@@ -78,6 +79,7 @@ This plugin is Homebridge verified and HOOBS certified and can be easily install
 | `platform`       |   always "RoomMe"                                       |     ✓    |     -    |  String  |
 | `anyoneSensor`   | When set to `true`, it creates an extra occupancy service on each room which represent "Anyone". It will trigger when someone is in the room and will turn off when no one is in the room. [read more here](#anyone-sensor)     |   |  `false`  | Boolean |
 | `leftHomeSwitch` |  When set to `true`, it creates a switch in HomeKit for each user. When turned ON, it will remove this user from the last room he has been detected in. [read more here](#left-home-switch)                              |   |  `false`  | Boolean |
+| `disableExitEvents` |  When set to `true`, the plugin will ignore 'Exit' events and will only use other rooms 'Entry' events to get you out from all other rooms. enable if you experience false room exits.        |   |  `false`  | Boolean |
 | `host`           |  Hostname of the generated server.  [read more here](#advanced-server-configurations)  |   | `0.0.0.0` |  String |
 | `port`               |  Port of the generated server.  [read more here](#advanced-server-configurations)  |   |  `13579`  |  String |
 | `secured`    |  Creates HTTPS secure server with SSL certificate that you provide.                         |   |  `false`  | Boolean |
@@ -112,7 +114,7 @@ Because of this method, there are some limitations to the presence detection in 
 
 3. **LIMITATION** - RoomMe knows which user is in which room and reports events on each entrance of a user to a room. The problem comes when you leave the house, that's where RoomMe fails to detect room exit. So in theory, if you leave the house, RoomMe will still consider you as present in the last room you've been in because the mobile device is not in range with the sensor to report exit.
 
- - **SOLUTION** - To make sure HomeKit is always in sync and your room occupancy detection is always accurate (*"turn off all sesnors for me when I leave home"*), I created the **"Left Home"** Switch. When enabled in the plugin settings (config), it will create a switch in HomeKit for each user. When turned ON, it will remove this user from the last room he has been detected in.<br>Once the switch is set up, you'll need to create an automation based on Home app geolocation (or any geolocation option you use in HomeKit) to turn ON this switch for a user when he leaves home.
+ - **SOLUTION** - To make sure HomeKit is always in sync and your room occupancy detection is always accurate (*"turn off all sensors for me when I leave home"*), I created the **"Left Home"** Switch. When enabled in the plugin settings (config), it will create a switch in HomeKit for each user. When turned ON, it will remove this user from the last room he has been detected in.<br>Once the switch is set up, you'll need to create an automation based on Home app geolocation (or any geolocation option you use in HomeKit) to turn ON this switch for a user when he leaves home.
  <br>example:<br>
  <img src="branding/automation.png" width="300px"><br>
  *The switch will automatically shut off after 2 seconds

@@ -30,22 +30,22 @@ const dbUpdate = function (platform) {
 
 	const addRoomAccessory = (room, users) => {
 
-				if (!platform.cachedState[room.sensorId])
-					platform.cachedState[room.sensorId] = []
-					
-				// add Sensor or verify cached sensor
-				const Sensor = new OccupancySensor(room, platform)
-				
-				// add anyone sensor
-				if (platform.anyoneSensor)
-					Sensor.addAnyoneService()
+		if (!platform.cachedState[room.sensorId])
+			platform.cachedState[room.sensorId] = []
+			
+		// add Sensor or verify cached sensor
+		const Sensor = new OccupancySensor(room, platform)
+		
+		// add anyone sensor
+		if (platform.anyoneSensor)
+			Sensor.addAnyoneService()
 
-				// add users services
-				users.forEach(user => {Sensor.addUserService(user)})
+		// add users services
+		users.forEach(user => {Sensor.addUserService(user)})
 
 
-				platform.cachedSensors.push(Sensor)
-				platform.cachedAccessories.push(Sensor.accessory)
+		platform.cachedSensors.push(Sensor)
+		platform.cachedAccessories.push(Sensor.accessory)
 
 	}
 

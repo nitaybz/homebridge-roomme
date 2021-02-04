@@ -27,6 +27,13 @@
                 "default": false,
                 "required": false
             },
+            "disableExitEvents": {
+                "title": "Disable Exit Events",
+                "description": "When enabled, the plugin will ignore 'Exit' events and will only use other rooms 'Entry' events to get you out from all other rooms. enable if you experience false room exits.",
+                "type": "boolean",
+                "default": false,
+                "required": false
+            },
             "host": {
                 "title": "Server Hostname  **ADVANCED**",
                 "description": "Hostname of the generated server.  <a target=\"_blank\" href=\"https://github.com/nitaybz/homebridge-roomme#advanced-server-configurations\">read more here</a>",
